@@ -46,7 +46,6 @@ const images = [
   },
 ];
 
-const galleryListItem = document.querySelector(".gallery-item");
 const gallery = document.querySelector(".gallery");
 
 const markup = images
@@ -78,7 +77,6 @@ gallery.addEventListener("click", (ev) => {
   );
   modalWindow.show();
   
-
   gallery.addEventListener("keydown", closeModalWindow);
   function closeModalWindow(ev) {
      if (ev.key === "Escape" && modalWindow.visible()) {
