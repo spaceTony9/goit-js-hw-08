@@ -76,13 +76,14 @@ gallery.addEventListener("click", (ev) => {
 	`
   );
   modalWindow.show();
-  
-  gallery.addEventListener("keydown", closeModalWindow);
+
+  document.addEventListener("keydown", closeModalWindow);
+
   function closeModalWindow(ev) {
-     if (ev.key === "Escape" && modalWindow.visible()) {
-       modalWindow.close();
-       gallery.removeEventListener("keydown", closeModalWindow);
-     }
+    if (ev.key === "Escape" && modalWindow.visible()) {
+      modalWindow.close();
+      document.removeEventListener("keydown", closeModalWindow);
+    }
   }
   ev.preventDefault();
 });
