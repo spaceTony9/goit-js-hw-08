@@ -66,24 +66,25 @@ const markup = images
 
 gallery.insertAdjacentHTML("beforeend", markup);
 
-gallery.addEventListener("click", (ev) => {
-  if (ev.target.nodeName !== "IMG") {
+gallery.addEventListener("click", (e) => {
+  e.preventDefault();
+  if (e.target.nodeName !== "IMG") {
     return;
   }
   const modalWindow = basicLightbox.create(
     `
-		<img width="1400" height="900" src="${ev.target.getAttribute("data-source")}">
-	`
+		<img width="1400" height="900" src="${e.target.getAttribute("data-source")}">
+	`,
+    {
+      onShow: () => document.addEventListener("keydown", closeModalWindow),
+      onClose: () => document.removeEventListener("keydown", closeModalWindow),
+    }
   );
   modalWindow.show();
 
-  document.addEventListener("keydown", closeModalWindow);
-
-  function closeModalWindow(ev) {
-    if (ev.key === "Escape" && modalWindow.visible()) {
+  function closeModalWindow(e) {
+    if (e.key === "Escape" && modalWindow.visible()) {
       modalWindow.close();
-      document.removeEventListener("keydown", closeModalWindow);
     }
   }
-  ev.preventDefault();
 });
